@@ -18,19 +18,15 @@ export TERM=xterm
 # ccache
 export USE_CCACHE=1
 export CCACHE_DIR=/home/$username/ccache
-prebuilts/misc/linux-x86/ccache/ccache -M 100G
-export KBUILD_BUILD_USER=SeekNDstroy
+prebuilts/misc/linux-x86/ccache/ccache -M 50G
+export KBUILD_BUILD_USER=$username
 export KBUILD_BUILD_HOST=ThunderServer
 
 # clean
-if [ "$make_clean" = "yes" ];
-then
 make clean && make clobber
-wait
 echo -e ${cya}"OUT dir from your repo deleted"${txtrst};
-fi
 
 # build
 . build/envsetup.sh
-lunch aosp_mido-userdebug
-make bacon -j6
+lunch lineage_mido-userdebug
+make bacon -j8
